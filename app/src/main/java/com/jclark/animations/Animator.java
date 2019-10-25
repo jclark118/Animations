@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
+import android.view.animation.Transformation;
 
 /**
  * Assign static animation to a view and run it
@@ -33,8 +35,30 @@ public class Animator {
         final AnimatorSet set1 = new AnimatorSet();
         set1.playTogether(fadeAnim, rotateAnim);
 
-        // Play
+        // Play then reverse
         playThenReverse(set1, view);
+    }
+
+
+
+    /**
+     * Assign a rotate + fade in animation to the given view and stay visible when done
+     * @param view the view to animate
+     * @param duration duration of the animation
+     */
+    public static void rotateFadeIn(View view, long duration){
+        // Fade in
+        ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, View.ALPHA, 0, 1);
+        fadeAnim.setDuration(duration);
+
+        // Rotate
+        ObjectAnimator rotateAnim = ObjectAnimator.ofFloat(view, View.ROTATION, 180, 0);
+        rotateAnim.setDuration(duration);
+
+        // Play
+        AnimatorSet set1 = new AnimatorSet();
+        set1.playTogether(fadeAnim, rotateAnim);
+        set1.start();
     }
 
 
@@ -57,11 +81,102 @@ public class Animator {
         fadeOut.setRepeatMode(Animation.REVERSE);
         fadeOut.setRepeatCount(1);
 
+        // Play
         AnimationSet set = new AnimationSet(false);
         set.addAnimation(grow);
         set.addAnimation(shrink);
         set.addAnimation(fadeOut);
         view.startAnimation(set);
+    }
+
+
+    /**
+     * Assign a bounce animation from right to left
+     */
+    public static void bounceRightToLeft(View view, long duration){
+        ObjectAnimator slide = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 180, -50);
+        slide.setDuration(duration);
+
+        ObjectAnimator slide2 = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, -50, 80);
+        slide2.setDuration(duration);
+
+        ObjectAnimator slide3 = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 80, 0);
+        slide3.setDuration(duration);
+
+        AnimatorSet set = new AnimatorSet();
+        set.playSequentially(slide, slide2, slide3);
+        set.start();
+    }
+
+
+
+    /**
+     * Assign a fade and slide in animation to the given view
+     * @param view the view to animate
+     * @param duration duration of the animation
+     */
+    public static void fadeInFromRight(View view, long duration){
+        ObjectAnimator slide = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 180, 0);
+        slide.setDuration(duration);
+
+        ObjectAnimator fade = ObjectAnimator.ofFloat(view, View.ALPHA, 0, 1);
+        fade.setDuration(duration);
+
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(slide, fade);
+        set.start();
+    }
+
+
+
+    /**
+     * Assign a "fade in" animation to the given view
+     * @param view the view to animate
+     * @param duration duration of the animation
+     */
+    public static void setFadeInAnimatiom(View view, long duration){
+        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(duration);
+        view.startAnimation(anim);
+    }
+
+
+
+    /**
+     * Assign a "scale in to full size" animation to the given view
+     * @param view the view to animate
+     * @param duration duration of the animation
+     */
+    public static void setScaleAnimatiom(View view, long duration){
+        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(duration);
+        view.startAnimation(anim);
+    }
+
+
+    /**
+     * Collapse like a drawer
+     * @param view view to animate
+     */
+    public static void collapse(final View view) {
+        final int initialHeight = view.getMeasuredHeight();
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                if (interpolatedTime == 1) {
+                    view.setVisibility(View.GONE);
+                } else {
+                    view.getLayoutParams().height = initialHeight - (int) (initialHeight * interpolatedTime);
+                    view.requestLayout();
+                }
+            }
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+        a.setDuration((int) (initialHeight / view.getContext().getResources().getDisplayMetrics().density));
+        view.startAnimation(a);
     }
 
 

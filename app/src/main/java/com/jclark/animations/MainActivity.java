@@ -66,9 +66,21 @@ public class MainActivity extends AppCompatActivity {
         if(button.getText().toString().equalsIgnoreCase(getString(R.string.radio_bounce_anim))){
             // Bounce
             Animator.setBounceAnimatiom(textLabel, miliseconds);
-        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_rotate_fade))) {
-            // Rotate and fade
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_rotate_fade_out))) {
+            // Rotate and fade out
             Animator.rotateFadeOut(textLabel, miliseconds);
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_rotate_fade_in))) {
+            // Rotate and fade in
+            Animator.rotateFadeIn(textLabel, miliseconds);
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_bounce_right_left))) {
+            // Bounce from right to left
+            Animator.bounceRightToLeft(textLabel, miliseconds);
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_fade_in_from_right))) {
+            // Fade in from right
+            Animator.fadeInFromRight(textLabel, miliseconds);
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_fade_in))) {
+            // Fade in from right
+            Animator.setFadeInAnimatiom(textLabel, miliseconds);
         }
     }
 }

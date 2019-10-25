@@ -72,12 +72,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent">
 
-        <!--Rotate and fade-->
+        <!--Rotate and fade out-->
         <RadioButton
             android:id="@+id/radio_rotate_fade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/radio_rotate_fade"
+            android:text="@string/radio_rotate_fade_out"
+            android:checked="true"
+            />
+
+        <!--Rotate and fade in-->
+        <RadioButton
+            android:id="@+id/radio_rotate_fade_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_rotate_fade_in"
             android:checked="true"
             />
 
@@ -87,6 +96,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/radio_bounce_anim"/>
+
+        <!--Bounce right to left-->
+        <RadioButton
+            android:id="@+id/radio_bounce_right_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_bounce_right_left"/>
+
+        <!--Fade in from right-->
+        <RadioButton
+            android:id="@+id/radio_fade_in_from_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_fade_in_from_right"/>
+
+        <!--Fade in-->
+        <RadioButton
+            android:id="@+id/radio_fade_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_fade_in"/>
+
     </RadioGroup>
 
 

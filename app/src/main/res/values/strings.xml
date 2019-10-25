@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Animations</string>
     <string name="btn_label">Animate</string>
-    <string name="radio_rotate_fade">Rotate and fade</string>
+    <string name="radio_rotate_fade_out">Rotate and fade out</string>
+    <string name="radio_rotate_fade_in">Rotate and fade in</string>
     <string name="radio_bounce_anim">Bounce</string>
+    <string name="radio_bounce_right_left">Bounce Right to Left</string>
+    <string name="radio_fade_in_from_right">Fade in from right</string>
+    <string name="radio_fade_in">Fade in</string>
     <string name="default_duration">500</string>
     <string name="duration_label">Duration (milis): </string>
     <string name="duration_hint">Duration in miliseconds</string>
