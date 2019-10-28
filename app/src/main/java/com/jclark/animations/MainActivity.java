@@ -6,20 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 /**
  * Show a button, duration field, and a list of different animations.  Allow a user to select an animation type and
  * run that animation on a text label
  */
 public class MainActivity extends AppCompatActivity {
-
-    /**
-     * Text label to animate
-     */
-    private TextView textLabel;
 
     /**
      * Radio button group
@@ -30,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
      * Duration setting
      */
     private EditText duration;
+
+    /**
+     * Image to animate
+     */
+    private ImageView androidImage;
 
 
 
@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         duration = findViewById(R.id.text_duration);
-        textLabel = findViewById(R.id.label_hello);
         radioGroup = findViewById(R.id.group_radios);
+        androidImage = findViewById(R.id.android_image);
         Button animateButton = findViewById(R.id.button_animate);
         animateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,22 +65,22 @@ public class MainActivity extends AppCompatActivity {
         int miliseconds = Integer.parseInt(duration.getText().toString());
         if(button.getText().toString().equalsIgnoreCase(getString(R.string.radio_bounce_anim))){
             // Bounce
-            Animator.setBounceAnimatiom(textLabel, miliseconds);
+            Animator.setBounceAnimatiom(androidImage, miliseconds);
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_rotate_fade_out))) {
             // Rotate and fade out
-            Animator.rotateFadeOut(textLabel, miliseconds);
+            Animator.rotateFadeOut(androidImage, miliseconds);
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_rotate_fade_in))) {
             // Rotate and fade in
-            Animator.rotateFadeIn(textLabel, miliseconds);
+            Animator.rotateFadeIn(androidImage, miliseconds);
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_bounce_right_left))) {
             // Bounce from right to left
-            Animator.bounceRightToLeft(textLabel, miliseconds);
+            Animator.bounceRightToLeft(androidImage, miliseconds);
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_fade_in_from_right))) {
             // Fade in from right
-            Animator.fadeInFromRight(textLabel, miliseconds);
+            Animator.fadeInFromRight(androidImage, miliseconds);
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_fade_in))) {
             // Fade in from right
-            Animator.setFadeInAnimatiom(textLabel, miliseconds);
+            Animator.setFadeInAnimatiom(androidImage, miliseconds);
         }
     }
 }
