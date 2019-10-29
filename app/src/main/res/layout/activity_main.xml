@@ -117,6 +117,20 @@
             android:layout_height="wrap_content"
             android:text="@string/radio_fade_in"/>
 
+        <!--Scale from small-->
+        <RadioButton
+            android:id="@+id/scale_from_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scale_from_small"/>
+
+        <!--Scale from huge-->
+        <RadioButton
+            android:id="@+id/scale_from_huge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scale_from_huge"/>
+
     </RadioGroup>
 
 

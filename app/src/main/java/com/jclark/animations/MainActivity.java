@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.radio_fade_in))) {
             // Fade in from right
             Animator.setFadeInAnimatiom(androidImage, miliseconds);
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.scale_from_huge))) {
+            // Scale from huge
+            Animator.scaleFromHuge(androidImage, miliseconds);
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.scale_from_small))) {
+            // Scale from small
+            Animator.scaleFromSmall(androidImage, miliseconds);
         }
     }
 }

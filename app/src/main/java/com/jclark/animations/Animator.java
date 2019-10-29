@@ -143,14 +143,41 @@ public class Animator {
 
 
     /**
-     * Assign a "scale in to full size" animation to the given view
+     * Assign a "scale from big into small" animation to the given view
      * @param view the view to animate
      * @param duration duration of the animation
      */
-    public static void setScaleAnimatiom(View view, long duration){
-        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+    public static void scaleFromHuge(View view, long duration){
+        ScaleAnimation anim = new ScaleAnimation(10.0f, 1.0f, 10.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         anim.setDuration(duration);
         view.startAnimation(anim);
+    }
+
+
+
+    /**
+     * Assign a "scale in from nothing" animation to the given view
+     * @param view the view to animate
+     * @param duration duration of the animation
+     */
+    public static void scaleFromSmall(View view, long duration){
+        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.2f, 0.0f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(duration);
+
+        ScaleAnimation anim2 = new ScaleAnimation(1.0f, 0.6f, 1.0f, 0.6f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim2.setDuration(duration);
+        anim2.setStartOffset(duration);
+
+        ScaleAnimation anim3 = new ScaleAnimation(0.0f, 1.2f, 0.0f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim3.setDuration(duration);
+        anim3.setStartOffset(duration*2);
+
+
+        AnimationSet set = new AnimationSet(false);
+        set.addAnimation(anim);
+        set.addAnimation(anim2);
+//        set.addAnimation(anim3);
+        view.startAnimation(set);
     }
 
 
