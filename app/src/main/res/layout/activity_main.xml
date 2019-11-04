@@ -133,5 +133,14 @@
 
     </RadioGroup>
 
+    <!--Dark mode button-->
+    <Button
+        android:id="@+id/button_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go Dark"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

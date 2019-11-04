@@ -1,7 +1,9 @@
 package com.jclark.animations;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private ImageView androidImage;
 
+    /**
+     * Boolean to track light or dark mode
+     */
+    private boolean darkMode = false;
+
+    /**
+     * Dark / light mode toggle button
+     */
+    Button darkButton;
+
 
 
     /**
@@ -45,11 +57,35 @@ public class MainActivity extends AppCompatActivity {
         duration = findViewById(R.id.text_duration);
         radioGroup = findViewById(R.id.group_radios);
         androidImage = findViewById(R.id.android_image);
+        darkButton = findViewById(R.id.button_dark);
+
+        // Set initial text for dark mode toggle button
+        setDarkButtonText();
+
+        // Create button listeners
+        createButtonListeners();
+    }
+
+
+
+    /**
+     * Create listeners for animate and dark mode toggle buttons
+     */
+    private void createButtonListeners(){
+        // Animation listener
         Button animateButton = findViewById(R.id.button_animate);
         animateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 animate();
+            }
+        });
+
+        // Dark mode listener
+        darkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleDarkMode();
             }
         });
     }
@@ -87,6 +123,57 @@ public class MainActivity extends AppCompatActivity {
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.scale_from_small))) {
             // Scale from small
             Animator.scaleFromSmall(androidImage, miliseconds);
+        }
+    }
+
+
+
+    /**
+     * Toggle dark mode
+     */
+    private void toggleDarkMode(){
+
+        if(isDarkMode()){
+            // Set to light
+            darkButton.setText(R.string.go_dark);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            // Set to light
+            darkButton.setText(R.string.go_light);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+    }
+
+
+
+    /**
+     * Sets the text of the dark mode toggle button according to the current state
+     */
+    private void setDarkButtonText(){
+        if(isDarkMode()){
+            darkButton.setText(R.string.go_light);
+        } else{
+            darkButton.setText(R.string.go_dark);
+        }
+    }
+
+
+
+    /**
+     * Find out if we're currently set to dark mode
+     * @return true if the app is set to dark mode
+     */
+    private boolean isDarkMode(){
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                return false;// Night mode is not active, we're in day time
+            case Configuration.UI_MODE_NIGHT_YES:
+                return true;// Night mode is active, we're at night!
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                return false;// We don't know what mode we're in, assume notnight
+            default :
+                return false;
         }
     }
 }
