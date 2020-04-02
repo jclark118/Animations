@@ -11,6 +11,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.Transformation;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 /**
  * Assign static animation to a view and run it
  */
@@ -230,6 +232,15 @@ public class Animator {
             }
         });
         set.start();
+    }
+
+    /**
+     * Show the Lottie fingerprint animation
+     * @param lottieImage the lottie resource to show and animate
+     */
+    public static void showLottieFingerprint(View lottieImage){
+        LottieAnimationView fingerprint = (LottieAnimationView)lottieImage;
+        fingerprint.playAnimation();
     }
 
 }

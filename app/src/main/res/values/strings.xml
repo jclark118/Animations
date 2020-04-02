@@ -9,6 +9,7 @@
     <string name="radio_fade_in">Fade in</string>
     <string name="scale_from_huge">Scale from huge</string>
     <string name="scale_from_small">Scale from small</string>
+    <string name="show_lottie">Show Lottie fingerprint</string>
     <string name="default_duration">500</string>
     <string name="duration_label">Duration (milis): </string>
     <string name="duration_hint">Duration in miliseconds</string>

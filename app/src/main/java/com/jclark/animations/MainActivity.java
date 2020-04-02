@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
      */
     Button darkButton;
 
+    /**
+     * Lottie fingerprint image source
+     */
+    private ImageView lottieImage;
+
 
 
     /**
@@ -58,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.group_radios);
         androidImage = findViewById(R.id.android_image);
         darkButton = findViewById(R.id.button_dark);
+        lottieImage = findViewById(R.id.lottie_image);
+
+        // Show android image, hide lottie by default
+        showAndroidLogo(true);
 
         // Set initial text for dark mode toggle button
         setDarkButtonText();
@@ -96,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
      * Animate the main label based on which radio button is selected
      */
     private void animate(){
+        showAndroidLogo(true);
         int selectedId = radioGroup.getCheckedRadioButtonId();
         RadioButton button = findViewById(selectedId);
         int miliseconds = Integer.parseInt(duration.getText().toString());
@@ -123,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
         } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.scale_from_small))) {
             // Scale from small
             Animator.scaleFromSmall(androidImage, miliseconds);
+        } else if (button.getText().toString().equalsIgnoreCase(getString(R.string.show_lottie))) {
+            // Hide the android logo and show the lottie fingerprint animation
+            showAndroidLogo(false);
+            Animator.showLottieFingerprint(lottieImage);
         }
     }
 
@@ -132,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
      * Toggle dark mode
      */
     private void toggleDarkMode(){
-
         if(isDarkMode()){
             // Set to light
             darkButton.setText(R.string.go_dark);
@@ -174,6 +187,21 @@ public class MainActivity extends AppCompatActivity {
                 return false;// We don't know what mode we're in, assume notnight
             default :
                 return false;
+        }
+    }
+
+
+
+    /**
+     * Show the android logo and hide the Lottie image based on the flag
+     */
+    private void showAndroidLogo(boolean showAndroid){
+        if(showAndroid){
+            androidImage.setVisibility(View.VISIBLE);
+            lottieImage.setVisibility(View.GONE);
+        } else {
+            androidImage.setVisibility(View.GONE);
+            lottieImage.setVisibility(View.VISIBLE);
         }
     }
 }
